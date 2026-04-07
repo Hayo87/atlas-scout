@@ -20,11 +20,14 @@ atlas_scout/
 ├── notebooks/              # Exploration, experiments, and prototyping
 ├── requirements.txt
 └── README.md
+```
 
 ## Installation
 ```bash
 pip install -r requirements.txt
+```
 
 ## Run app
 ```bash
 streamlit run app/app.py
+```
