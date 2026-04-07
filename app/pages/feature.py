@@ -1,17 +1,36 @@
-import sys
-from pathlib import Path
-
-ROOT_DIR = Path(__file__).resolve().parents[2]
-if str(ROOT_DIR) not in sys.path:
-    sys.path.insert(0, str(ROOT_DIR))
-
 import streamlit as st
+from components.layout import page_columns
+from src.attributes import compute_geometry_attributes, compute_image_attributes
 
-st.markdown("### Analysis")
-st.caption("Dummy analysis page for now.")
+st.set_page_config(
+    page_title="Atlas Scout",
+    page_icon="static/logo.png",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
 
-with st.sidebar:
-    st.subheader("Analysis settings")
-    option = st.selectbox("Choose analysis", ["Overview", "Stats", "Export"])
 
-st.write("This is where analysis stuff will go.")
+def compute_features(segments_gdf):
+    gdf = segments_gdf.copy()
+ 
+    gdf = compute_geometry_attributes(gdf)
+    gdf = compute_image_attributes(gdf)
+    
+    return gdf 
+
+left, center, right = page_columns()
+
+with center:
+    st.markdown("### Define features")
+
+    if "segments_gdf" not in st.session_state or st.session_state.segments_gdf is None:
+        st.warning("Run segmentation first to generate terrain segments.")
+        st.stop()
+
+    else:
+        with st.spinner("Computing features..."):
+                st.session_state.features_gdf = compute_features(
+                    st.session_state.segments_gdf
+                )
+        st.success("Features computed")
+        st.dataframe(st.session_state.features_gdf, use_container_width=True)

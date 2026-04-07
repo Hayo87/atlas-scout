@@ -10,7 +10,7 @@ import leafmap.foliumap as leafmap
 
 from src.config import ORIGINAL_PATH, PREVIEW_PATH
 from src.raster import load_tif
-from src.segmentation import build_segments, segments_to_gdf
+from src.segmentation import build_segments, segments_to_gdf, segment_attributes
 from components.layout import page_columns
 
 
@@ -64,12 +64,19 @@ with center:
                     min_size=min_size,
                 )
 
-                gdf = segments_to_gdf(segments, transform, crs)
+                # Add segment attributes
+                attrs = segment_attributes(img, segments)
 
-                st.session_state.segments_gdf = gdf
-                st.session_state.segment_count = len(gdf)
+                # Convert to GeoDataFrame
+                segments_gdf = segments_to_gdf(segments, transform, crs)
 
-            st.toast(f"Segmentation ready • {len(gdf)} segments")
+                # Add attributes to the GeoDataFrame
+                segments_gdf = segments_gdf.merge(attrs, on="segment_id", how="left")
+
+                st.session_state.segments_gdf = segments_gdf
+                st.session_state.segment_count = len(segments_gdf)
+
+            st.toast(f"Segmentation ready • {len(segments_gdf)} segments")
 
         m = leafmap.Map()
         m.add_raster(str(PREVIEW_PATH), layer_name="Image")
@@ -85,7 +92,7 @@ with center:
                 },
             )
 
-        m.to_streamlit(height=450)
+        m.to_streamlit(height=500)
 
  
         with st.expander("ℹ️ Information", expanded=True):
