@@ -41,7 +41,7 @@ with left:
             resize = st.slider("Preview downscale factor", 1, 8, 4)
             scale = st.slider("Scale", 50, 1000, 100, step=25)
             sigma = st.slider("Sigma", 0.0, 2.0, 1.0, step=0.1)
-            min_size = st.slider("Min size", 20, 3000, 1000, step=100)
+            min_size = st.slider("Min size", 20, 3000, 2600, step=100)
 
             apply_segmentation = st.form_submit_button(
                 "Apply segmentation",
