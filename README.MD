@@ -1,7 +1,7 @@
 # Atlas Scout
 
-Atlas Scout is a **Streamlit demo application** for terrain analysis and geospatial exploration.  
-It is designed to support **terrain segmentation**, **feature identification**, and **overlay visualization** through a compact interactive interface.
+Atlas Scout is a **Streamlit demo application** for **terrain-based decision support**.  
+It helps users interpret **imagery and geospatial data** through a **chat-based copilot**, supporting **terrain feature identification**, **obstacle and change detection**, and **overlay visualization** in a compact interactive interface.
 
 ---
 

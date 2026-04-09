@@ -1,15 +1,19 @@
 title: "Info"
 
 purpose: >
-  Atlas Scout is a demo application for terrain analysis. It helps organize
-  terrain into useful segments, identify relevant features, and visualize
-  overlays for interpretation and planning.
+  Atlas Scout is a demo application for terrain-based decision support. Users
+  interact through a chat-based copilot that helps interpret terrain from an
+  operational perspective using aggregated imagery and geospatial data. It
+  identifies relevant terrain features, detects obstacles and changes,
+  visualizes overlays, and supports planning.
 
 key_requirements:
-  - Terrain or map-based input
-  - Terrain segmentation logic
-  - Feature identification and classification
-  - Overlay visualization
+  - Chat-based user interaction
+  - Aggregated imagery and geospatial data input
+  - Terrain feature identification and classification
+  - Terrain change and obstacle detection
+  - Operational overlay generation on user request
+  - Terrain-related query answering and interpretation
   - Interactive demo interface
 
 modules:
@@ -21,3 +25,5 @@ modules:
     description: "Identify terrain features and classify segments"
   - name: "Overlay"
     description: "Visualize terrain layers, markers, and map overlays"
+  - name: "Chat"
+    description: "Chat-based copilot for terrain interpretation, overlay requests, and simple operational queries"
